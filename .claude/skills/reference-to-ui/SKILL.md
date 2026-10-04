@@ -1,6 +1,6 @@
 ---
 name: reference-to-ui
-description: The lead skill for building and editing any UI (website, landing page, app screen, component, scroll/GSAP motion site). Use first, even when not named, when the user shares an example (screenshot, URL, screen recording, video) or asks to build, redesign or restyle a UI ("make it look like this", "copy this UI", "screenshot to code", "animations like this", "it looks AI generated"), and when they ask to change a site afterwards ("change the hero", "add a section", "make it bolder", "fix the mobile layout"). The example leads and every installed design skill does its part (ui-ux-pro-max, awesome-design-md, design-taste-frontend and the style skills, impeccable, ui-styling, GSAP and motion). Writes Google Flow and ChatGPT/Nano Banana prompts for missing visuals, builds cinematic scroll films from stills or video, and proves every build and edit with capture, compare, record and slop-check scripts.
+description: The lead skill for building and editing any UI (website, landing page, app screen, component, scroll/GSAP motion site). Use first, even when not named, when the user shares an example (screenshot, URL, screen recording, video) or asks to build, redesign or restyle a UI ("make it look like this", "copy this UI", "screenshot to code", "animations like this", "it looks AI generated"), and when they ask to change a site afterwards ("change the hero", "add a section", "make it bolder", "fix the mobile layout"). "Copy this" makes an exact copy where the other skills only report; "make something similar" brings in every installed design skill (ui-ux-pro-max, awesome-design-md, design-taste-frontend and the style skills, impeccable, ui-styling, GSAP and motion). Writes Google Flow and ChatGPT/Nano Banana prompts for missing visuals, builds cinematic scroll films from stills or video, and proves every build and edit with capture, compare, record and slop-check scripts.
 ---
 
 # reference-to-ui
@@ -63,13 +63,22 @@ Use the first that applies (details in `references/sources.md`):
 
 Also always collect the **project's own assets**: logo, colours, photos, real copy, names, dates, links, footage.
 
-Pick the mode and tell the user in one line:
-- **Clone:** match the example as closely as possible.
-- **Adapt** (default for "make it similar to this", "use this as an example"): the example's layout, rhythm, type scale, density, motion and mood, with the project's content and identity.
+Pick the mode from the user's words and tell them in one line which one you picked:
+- **Clone:** "copy this", "clone it", "make it exactly like this", "same as this", "replicate", "screenshot to code", "1:1", "pixel-perfect". Reproduce the example as closely as possible: same layout, sizes, colours, fonts, spacing, copy structure, images and motion. **The design skills do not change the look** (see Clone rules below).
+- **Adapt:** "make something similar", "like this", "in the style of", "inspired by", "based on", "use this as an example". Keep the example's layout, rhythm, type scale, density, motion and mood, with the project's content and identity, and use the full skill roster.
+- **Unclear** (just an example with "make this", or both kinds of words): ask one question before starting, "Copy it exactly, or make something similar in this style?", and wait for the answer.
+
+**Clone rules** (they override the skill roster and any skill's own rules):
+- Every visual and motion decision comes from the example. No style skill, no `awesome-design-md` look, no `design-taste-frontend` direction, no `impeccable` `bolder` / `quieter` / `colorize` / `polish`, no "improvements" to type, colour, spacing or layout.
+- Skills may only supply what a copy cannot get from the example: a free Google Fonts substitute for a font that cannot be loaded (`ui-ux-pro-max --domain google-fonts`), states the example never shows (hover, focus, mobile), built from the example's own tokens, and stack code (`ui-styling`) that renders the same result.
+- Quality checks (`impeccable audit` / `critique`, `ui-ux-pro-max --domain ux`, `slop-check.mjs`) **report only**. List what they find in the handover as optional suggestions; apply none of them unless the user asks. Non-visual fixes that change nothing on screen (alt text, form labels, semantic HTML) are fine.
+- Edits after a clone go through the Edit loop as usual: the user asked for that change, so its skills apply to that change only.
 
 If you clone a real brand, swap its name, logo and proprietary imagery for the user's (or a clearly fictional) brand, and say so.
 
 ## Skill roster (every build, before the spec)
+
+**Adapt mode and edits use the full roster. Clone mode uses only what the Clone rules above allow; write "Clone mode: skills report only" at the top of the roster.**
 
 Check which design skills are installed (the available-skills list, or `ls <skills-dir>`; account installs use the internal names listed in `references/skill-router.md`). Give every installed skill that fits a role below its job, and write the roster at the top of `SPEC.md`: one line per skill, its role, and the step where it runs.
 
@@ -130,8 +139,8 @@ Serve locally (dev server, or `npx http-server`). Then:
 1. **Static match:** `compare.mjs` against each reference screenshot (desktop, and mobile if you have one). `--fold` for first-screen-only in adapt mode.
 2. **Motion match** (if the example moves): `record.mjs --scroll` (or play), then `video-ref.sh` on the recording. Compare its `sheet.png` with the example's: same order of events, similar timing, same easing feel.
 3. Look at the images. List the three biggest differences: layout and proportions first, then type, then colour, then motion timing, then details. Fix, rerun, repeat.
-4. `slop-check.mjs`: fix every HIGH. `--allow` only what the example itself has, and tell the user.
-5. **UX pass:** 3 to 5 `ui-ux-pro-max --domain ux` queries for what you built, plus `impeccable audit` and `critique` if installed; fix what applies. For motion-heavy pages, `design-motion-principles` Audit mode.
+4. `slop-check.mjs`: fix every HIGH. `--allow` only what the example itself has, and tell the user. In Clone mode, `--allow` everything the example has and fix nothing that comes from it.
+5. **UX pass:** 3 to 5 `ui-ux-pro-max --domain ux` queries for what you built, plus `impeccable audit` and `critique` if installed. Adapt: fix what applies. Clone: report the findings as suggestions and change nothing visual. For motion-heavy pages, `design-motion-principles` Audit mode.
 6. **Interaction pass:** click every control in a real browser (Playwright): menus, forms, carousels, modals, toggles. Zero console errors.
 
 Stop when:
@@ -185,5 +194,5 @@ These made a past build in this repo fail review ("swap the name and it launches
 
 Per-section tests:
 - **Reference test:** point to where in the example this choice comes from. If you cannot, remove it.
-- **Swap test:** replace the project name with another. If the section still works unchanged, bring in the project's own colours, imagery or artefacts.
+- **Swap test** (Adapt mode only; a clone keeps the example's look): replace the project name with another. If the section still works unchanged, bring in the project's own colours, imagery or artefacts.
 - **Restraint:** one light source, one accent system, two type families at most, one signature motion moment.
