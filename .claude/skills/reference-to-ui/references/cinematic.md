@@ -5,9 +5,10 @@ A cinematic site is one where the visitor scrolls and a camera seems to travel t
 ## Where the visuals come from (in this order)
 
 1. **The user's own footage or photos.** Real always wins. Footage: `scripts/frames.sh` + `assets/scroll-sequence/`. Photos: the image path below.
-2. **AI stills from ChatGPT or Nano Banana** (free tiers are enough). Write the prompts with `scripts/image-prompts.mjs`; the user generates and sends the files back.
+2. **AI stills from Google Flow, ChatGPT or Nano Banana** (free). For Flow write the prompts with `scripts/flow-prompts.mjs`, otherwise `scripts/image-prompts.mjs`; the user generates and sends the files back.
 3. **Procedural shader scene** (`assets/cinematic/cinema-shaders.js`: `clouds` (cloud sea at golden hour), `ocean` (sunset waves), `aurora` (night sky over a ridge), `liquid` (dark molten rock / metal), `silk` (smooth folds of light)) when there are no images yet, as a placeholder while images are made, or when an abstract world suits the brand (tech, finance, luxury).
-4. Higgsfield video (`references/higgsfield.md`) only if the user asks for real generated motion and has an account.
+4. Google Flow Veo video (`references/google-flow.md`) when the motion is the point (a product turn, a fly-through) and the user will spend the credits.
+5. Higgsfield video (`references/higgsfield.md`) only if the user asks for real generated motion and has an account.
 
 ## The image path
 

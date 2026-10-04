@@ -66,7 +66,7 @@ These carry strong opinions. Use one only when the example clearly belongs to it
 | Scroll-driven, pinned, scrubbed, image-sequence, text reveals | `references/gsap.md` + `ui-ux-pro-max --domain gsap` |
 | Micro-interactions, hover, enter/exit, component transitions | `design-motion-principles` (Create mode) |
 | Check the motion you built is not "AI slop motion" | `design-motion-principles` (Audit mode) on the finished page |
-| Footage the example has but the user lacks (jet, drone, product shot) | `references/higgsfield.md` + `scripts/higgsfield-prompts.mjs` (built in); then `scripts/frames.sh` and `assets/scroll-sequence/`. `ads-and-videos`, if installed, adds ad-style shot lists |
+| Footage the example has but the user lacks (jet, drone, product shot) | `references/google-flow.md` + `scripts/flow-prompts.mjs` (built in, the default), or `references/higgsfield.md` + `scripts/higgsfield-prompts.mjs` for Higgsfield users; then `scripts/frames.sh` and `assets/scroll-sequence/`. `ads-and-videos`, if installed, adds ad-style shot lists |
 
 ## Images and concepts
 
