@@ -65,6 +65,26 @@ Pick the mode and tell the user in one line:
 
 If you clone a real brand, swap its name, logo and proprietary imagery for the user's (or a clearly fictional) brand, and say so.
 
+## Skill roster (every build, before the spec)
+
+Check which design skills are installed (the available-skills list, or `ls <skills-dir>`; account installs use the internal names listed in `references/skill-router.md`). Give every installed skill that fits a role below its job, and write the roster at the top of `SPEC.md`: one line per skill, its role, and the step where it runs.
+
+| Role | Skill | Runs in |
+|---|---|---|
+| Design intelligence | `ui-ux-pro-max`: `--design-system` for tokens and gaps, `--domain` queries for fonts, UX and GSAP | Step 2 and Step 4 (always) |
+| Look and brand systems | `awesome-claude-design` / `awesome-design-md`: the closest DESIGN.md to the example, for components and states the example does not show | Step 1 (no example or a named brand or feel), Step 2 (gaps) |
+| Craft rules | `taste-skill` / `design-taste-frontend` pre-flight check on every landing page or portfolio, plus the one style skill (soft, minimalist, brutalist, gpt-taste) that matches the example, if any | Step 2 and Step 3 |
+| Stack | `ui-styling` for React + Tailwind/shadcn | Step 3 |
+| Motion | `references/gsap.md`, `design-motion-principles` | Step 3 and Step 4 |
+| Browser | `playwright-cli` to click through a reference site | Step 1 |
+| Review | `impeccable` (`audit`, `critique`, `polish`), alongside the `ui-ux-pro-max` UX queries and `slop-check.mjs` | Step 4 |
+| Sharing | `brag` for a launch video, when the user wants one | After Step 5 |
+
+Rules:
+- **No single skill runs the build.** This skill and the example lead; each installed skill does its own role and nothing more. `impeccable` reviews and polishes: it does not set the direction, pick the look, or stand in for the other roles. The same goes for any other skill.
+- **Use every installed skill that fits.** If you skip one that fits a role, say why in the handover (for example "no style skill: the example is not in any of their families").
+- A missing skill never blocks the build: use the fallback in `references/skill-router.md` and say so.
+
 ## Step 2: Spec (before code)
 
 Write `SPEC.md` in the scratch folder. Short and concrete:
@@ -85,7 +105,7 @@ Write `SPEC.md` in the scratch folder. Short and concrete:
 
 - Use the project's stack and conventions (`ui-styling` for React + Tailwind/shadcn). All tokens in one place (CSS variables or Tailwind theme); nothing off-spec.
 - Order: tokens → skeleton with real section heights → typography → components → motion.
-- **Style skills** (`soft-skill`, `minimalist-skill`, `brutalist-skill`, `taste-skill`, `gpt-tasteskill`): only when the example belongs to that family. Take their craft rules, not their layout mandates (see the router).
+- **Style skills** (`soft-skill`, `minimalist-skill`, `brutalist-skill`, `gpt-tasteskill`, under their account names too): only when the example belongs to that family. Take their craft rules, not their layout mandates (see the router). Run the `taste-skill` pre-flight on every landing page or portfolio, as the roster says.
 - **Motion:** implement from `references/gsap.md` (scroll, pin, scrub, image sequence, text reveal) and `design-motion-principles` Create mode (hover, micro-interactions, enter/exit). Match the example's measured timing. Hidden start states are set from JS, so content shows if scripts fail. Respect `prefers-reduced-motion`.
 - **Cinematic sites** (a scroll film like Vela, a journey through a place, a hero that feels like a movie): follow `references/cinematic.md`. In short:
   1. Plan the page and the beat map first (`PLAN.md`), with copy in the customers' own words and one call to action.
@@ -120,7 +140,7 @@ Never say it matches unless the last compare/record run shows it.
 
 - Send the user the final side-by-side image(s) and, for motion, the recording. If footage is still pending, send `PROMPTS.md` and say exactly what to send back.
 - Give them a way to open it: a published preview link when the session can publish one, otherwise the exact command to serve it locally.
-- Report in a few lines: example used, mode, which skills contributed what, what matches, what is substituted or guessed and why, and what they need to provide (fonts, photos, footage, copy).
+- Report in a few lines: example used, mode, the skill roster (each skill used and what it changed, plus any installed skill that fit a role but was skipped, and why), what matches, what is substituted or guessed and why, and what they need to provide (fonts, photos, footage, copy).
 
 ## Never (unless the example has it)
 
