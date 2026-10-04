@@ -1,6 +1,6 @@
 ---
 name: reference-to-ui
-description: The lead skill for building, rebuilding or restyling any UI (website, landing page, app screen, component, scroll/GSAP motion site) from real examples, pulling in every installed design skill (ui-ux-pro-max, GSAP patterns, awesome-design-md, design-motion-principles, taste/soft/minimalist/brutalist, impeccable, ui-styling) so it never looks AI-generated. Use first, even when not named, whenever the user asks to build or redesign a UI, says "make it similar to this", "copy this UI", "make it look like this", "screenshot to code", "use this as an example", "animations like this", "it looks AI generated", or shares a screenshot, URL, screen recording or video of a design. The example always leads; the other skills fill gaps. Makes cinematic scroll sites by writing Google Flow prompts (free images, Veo video) and ChatGPT/Nano Banana prompts and turning stills into 3D camera journeys with depth maps, with shader scenes as backup. Proves the result with bundled capture, compare, record and slop-check scripts.
+description: The lead skill for building and editing any UI (website, landing page, app screen, component, scroll/GSAP motion site). Use first, even when not named, when the user shares an example (screenshot, URL, screen recording, video) or asks to build, redesign or restyle a UI ("make it look like this", "copy this UI", "screenshot to code", "animations like this", "it looks AI generated"), and when they ask to change a site afterwards ("change the hero", "add a section", "make it bolder", "fix the mobile layout"). The example leads and every installed design skill does its part (ui-ux-pro-max, awesome-design-md, design-taste-frontend and the style skills, impeccable, ui-styling, GSAP and motion). Writes Google Flow and ChatGPT/Nano Banana prompts for missing visuals, builds cinematic scroll films from stills or video, and proves every build and edit with capture, compare, record and slop-check scripts.
 ---
 
 # reference-to-ui
@@ -11,6 +11,10 @@ You are the conductor. **The example leads; every other design skill plays under
 - **Other skills fill gaps, never override.** `ui-ux-pro-max`, the GSAP guide, the style skills and the brand libraries supply what the example does not show (states, mobile, accessibility, free font substitutes, motion code). If a skill's rule contradicts the example, the example wins.
 - **Precedence:** the user's words > the example > the project's existing design system > skill suggestions.
 - **Done means proven:** the scripts below say it matches and is clean, not "it looks right".
+
+**Two ways in, both through this skill:**
+- **Build:** the user sends an example or asks for a new or redesigned UI. Follow Steps 1 to 5.
+- **Edit:** the user asks to change a site that already exists (one built here, or any project). Follow the **Edit loop** below. Every follow-up change comes back here; never hand the whole job to one other skill.
 
 Read these as you need them (all in this skill folder):
 
@@ -84,6 +88,7 @@ Rules:
 - **No single skill runs the build.** This skill and the example lead; each installed skill does its own role and nothing more. `impeccable` reviews and polishes: it does not set the direction, pick the look, or stand in for the other roles. The same goes for any other skill.
 - **Use every installed skill that fits.** If you skip one that fits a role, say why in the handover (for example "no style skill: the example is not in any of their families").
 - A missing skill never blocks the build: use the fallback in `references/skill-router.md` and say so.
+- The roster carries over to edits: the **Edit loop** says which skill handles which kind of change.
 
 ## Step 2: Spec (before code)
 
@@ -141,6 +146,30 @@ Never say it matches unless the last compare/record run shows it.
 - Send the user the final side-by-side image(s) and, for motion, the recording. If footage is still pending, send `PROMPTS.md` and say exactly what to send back.
 - Give them a way to open it: a published preview link when the session can publish one, otherwise the exact command to serve it locally.
 - Report in a few lines: example used, mode, the skill roster (each skill used and what it changed, plus any installed skill that fit a role but was skipped, and why), what matches, what is substituted or guessed and why, and what they need to provide (fonts, photos, footage, copy).
+
+## Edit loop (changing a site that exists)
+
+For "make the hero bigger", "add a pricing section", "it feels flat", "fix mobile", "make it more like this" and every other change after a build.
+
+1. **Baseline first.** `capture.mjs` the current page (desktop and mobile) into the scratch folder before touching code. Re-read `SPEC.md` if this skill built it, otherwise read the tokens from the code, so the edit stays on the same system.
+2. **Route the change** to the skill that owns it (use every one that fits; account installs use the names in `references/skill-router.md`):
+
+| Change | Skills |
+|---|---|
+| Louder or calmer, more colour, better type, layout rhythm | `impeccable bolder` / `quieter` / `colorize` / `typeset` / `layout`, with `ui-ux-pro-max --domain typography` or `color` |
+| New section or component | The closest component in `awesome-design-md` (or the original example), `ui-ux-pro-max --domain landing` and `ux`, the `design-taste-frontend` pre-flight |
+| Copy, labels, error and empty states | `impeccable clarify`; never invent stats, quotes or claims |
+| Motion | `references/gsap.md`, `design-motion-principles`, `impeccable animate` |
+| Mobile and responsive | `impeccable adapt`, `ui-ux-pro-max --domain ux` |
+| "It looks AI-generated" | `slop-check.mjs`, `design-taste-frontend`, `impeccable critique`, then the matching style skill |
+| Accessibility, performance, edge cases | `impeccable audit` / `harden`, `ui-ux-pro-max --domain ux` |
+| "Make it more like this" (a new example) | Back to Step 1 with the new example, keeping the content |
+| New images or footage | `scripts/flow-prompts.mjs` and `references/google-flow.md` |
+| React + Tailwind/shadcn components | `ui-styling` |
+
+3. **Change only what was asked.** Keep tokens, copy, sections and behaviour outside the request exactly as they were; ask before replacing copy or adding claims.
+4. **Prove it.** `compare.mjs` the edited page against the baseline: the diff should sit only where the change was made. Then `slop-check.mjs`, an interaction pass on anything touched, and the mobile view.
+5. **Report** in a few lines: what changed, which skills did what, the before/after images, and anything you left alone on purpose.
 
 ## Never (unless the example has it)
 
