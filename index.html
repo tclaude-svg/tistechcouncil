@@ -8,7 +8,7 @@
 <style>
 /* Layout: Apple Pro product page. Black stage, centred hero, bento highlights, alternating feature bands, colour picker, spec table. */
 :root {
-  --bg: #000;
+  --bg: #020202;               /* matches the black of the Flow render */
   --surface: #111113;
   --surface-2: #1c1c1f;
   --line: #2a2a2e;
@@ -81,7 +81,20 @@ p { margin: 0; }
 @media (max-width: 720px) { .nav ul { display: none; } .nav .btn { margin-left: auto; } }
 
 /* ---------- Hero ---------- */
-.hero { text-align: center; padding-block: clamp(48px, 9vw, 96px) 0; overflow: hidden; }
+.seq { position: relative; height: 320vh; }
+.seq__stage {
+  position: sticky; top: calc(env(safe-area-inset-top, 0px) + 53px);
+  height: calc(100vh - 53px); height: calc(100svh - 53px); overflow: hidden;
+}
+.seq__canvas, .seq__poster { position: absolute; inset: 0; width: 100%; height: 100%; }
+.seq__poster { object-fit: contain; }
+.seq__copy { position: absolute; inset-inline: 0; top: clamp(20px, 5vh, 56px); padding-inline: var(--gutter); z-index: 1; }
+.seq__caption {
+  position: absolute; inset-inline: 0; bottom: clamp(20px, 5vh, 48px); text-align: center; z-index: 1;
+  padding-inline: var(--gutter); font-family: var(--font-display); font-weight: 600;
+  font-size: var(--step-h3); letter-spacing: -0.02em; opacity: 0;
+}
+.hero { text-align: center; }
 .eyebrow { color: #f56300; font-weight: 600; font-size: 1.05rem; letter-spacing: 0; }
 .hero h1 {
   font-size: var(--step-hero); font-weight: 700; line-height: 1.02; margin-top: 8px;
@@ -92,7 +105,6 @@ p { margin: 0; }
 .hero .price { color: var(--muted); margin-top: 10px; }
 .hero .ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
 .stage { position: relative; }
-.hero .stage { margin-top: clamp(32px, 6vw, 64px); }
 
 /* Image slots: show the generated render; fall back to a drawn phone until it exists */
 .shot { position: relative; z-index: 1; margin-inline: auto; max-width: 100%; }
@@ -199,6 +211,9 @@ section { padding-block: clamp(72px, 11vw, 140px); }
   outline-offset: 4px;
 }
 .swatch[aria-pressed="true"] { outline: 2px solid var(--fg); }
+.color-img { width: min(720px, 100%); height: auto; margin-inline: auto; transition: filter .5s ease; }
+.crop-back { width: 100%; height: auto; max-width: 300px; aspect-ratio: 9 / 16; object-fit: cover; object-position: 4% 50%; }
+.band .media:has(.crop-back) { background: transparent; }
 .color-name { margin-top: 16px; font-weight: 600; min-height: 1.5em; }
 
 /* ---------- Specs table ---------- */
@@ -224,10 +239,12 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
 @keyframes rise { from { transform: translateY(24px); opacity: .001; } to { transform: none; opacity: 1; } }
 .hero .eyebrow, .hero h1, .hero .lead, .hero .price, .hero .ctas { animation: rise .9s cubic-bezier(.2,.8,.2,1) both; }
 .hero h1 { animation-delay: .08s; } .hero .lead { animation-delay: .16s; } .hero .price { animation-delay: .22s; } .hero .ctas { animation-delay: .28s; }
-.hero .stage .shot { animation: rise 1.2s .35s cubic-bezier(.2,.8,.2,1) both; }
 .reveal { transition: transform .9s cubic-bezier(.2,.8,.2,1); }
 .reveal.below { transform: translateY(28px); }
 @media (prefers-reduced-motion: reduce) {
+  .seq { height: auto; }
+  .seq__stage { position: relative; top: 0; }
+  .seq__caption { opacity: 1; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }
@@ -251,25 +268,24 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
 
 <main id="top">
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="wrap">
-      <p class="eyebrow">New</p>
-      <h1>iPhone 18 Pro Max</h1>
-      <p class="lead">A camera that breathes. A chip that barely does.</p>
-      <p class="price">From $1,199 or $49.95/mo. for 24 mo.</p>
-      <div class="ctas">
-        <a class="btn" href="#buy">Buy</a>
-        <a class="btn ghost" href="#highlights">Learn more</a>
-      </div>
-      <div class="stage">
-        <div class="shot">
-          <img src="images/hero.png" alt="iPhone 18 Pro Max in Deep Cherry, front and back" width="1200" height="900" onerror="this.parentNode.classList.add('empty')">
-          <div class="mock" aria-hidden="true"><span class="plateau"></span><span class="lens l1"></span><span class="lens l2"></span><span class="lens l3"></span><span class="flash"></span><span class="lidar"></span><span class="mark"></span></div>
+  <!-- HERO: scroll-scrubbed turn from the Flow render -->
+  <section class="seq" id="hero" data-frames="192" data-src="images/hero-seq/{n}.webp" data-feather="#020202">
+    <div class="seq__stage">
+      <canvas class="seq__canvas" data-media role="img" aria-label="Two iPhone 18 Pro Max phones in Deep Cherry turning from front to back"></canvas>
+      <noscript><img class="seq__poster" src="images/hero-seq/001.webp" alt="Two iPhone 18 Pro Max phones in Deep Cherry"></noscript>
+      <div class="seq__copy hero" id="hero-copy" data-beat>
+        <p class="eyebrow">New</p>
+        <h1>iPhone 18 Pro Max</h1>
+        <p class="lead">A camera that breathes. A chip that barely does.</p>
+        <p class="price">From $1,199 or $49.95/mo. for 24 mo.</p>
+        <div class="ctas">
+          <a class="btn" href="#buy">Buy</a>
+          <a class="btn ghost" href="#highlights">Learn more</a>
         </div>
       </div>
+      <p class="seq__caption" id="hero-caption" data-beat>Forged aluminum unibody in Deep Cherry.</p>
     </div>
-  </header>
+  </section>
 
   <!-- HIGHLIGHTS -->
   <section id="highlights">
@@ -292,11 +308,11 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
           <p>The longest battery life ever in an iPhone.</p>
         </article>
         <article class="tile span-4 t-design reveal">
-          <h3>Aluminum unibody. Full‑width camera plateau.</h3>
+          <h3>Aluminum unibody. Satin cherry finish.</h3>
           <p>A thermally forged frame and a vapor chamber spread heat across the whole phone, so it stays cool through long 4K120 Dolby Vision shoots.</p>
         </article>
         <article class="tile span-3 reveal">
-          <h3>A smaller Dynamic Island</h3>
+          <h3>A smaller front camera cutout</h3>
           <p>Face ID moves under the display, leaving more of the 6.9‑inch screen for what you're watching.</p>
         </article>
         <article class="tile span-3 reveal">
@@ -349,10 +365,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
         </div>
       </div>
       <div class="media">
-        <div class="shot">
-          <img src="images/chip.png" alt="A20 Pro chip render" onerror="this.parentNode.classList.add('empty')">
-          <div class="mock" aria-hidden="true"><span class="plateau"></span><span class="lens l1"></span><span class="lens l2"></span><span class="lens l3"></span><span class="flash"></span><span class="lidar"></span><span class="mark"></span></div>
-        </div>
+        <img class="crop-back" src="images/phones.webp" alt="Back of iPhone 18 Pro Max in Deep Cherry" loading="lazy" width="1200" height="1080">
       </div>
     </div>
   </section>
@@ -363,16 +376,13 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
       <p class="kicker">Colors</p>
       <h2 class="headline">Four finishes. One is unmistakable.</h2>
       <div class="stage">
-        <div class="shot" id="color-shot">
-          <img id="color-img" src="images/color-cherry.png" alt="iPhone 18 Pro Max in Deep Cherry" onerror="this.parentNode.classList.add('empty')">
-          <div class="mock" aria-hidden="true"><span class="plateau"></span><span class="lens l1"></span><span class="lens l2"></span><span class="lens l3"></span><span class="flash"></span><span class="lidar"></span><span class="mark"></span></div>
-        </div>
+        <img id="color-img" class="color-img" src="images/phones.webp" alt="iPhone 18 Pro Max in Deep Cherry" loading="lazy" width="1200" height="1080">
       </div>
       <div class="swatches" role="group" aria-label="Choose a color">
-        <button class="swatch" type="button" style="--c:#6b1f2a" data-color="#6b1f2a" data-name="Deep Cherry" data-img="images/color-cherry.png" aria-pressed="true" aria-label="Deep Cherry"></button>
-        <button class="swatch" type="button" style="--c:#9fb7cf" data-color="#7f97ae" data-name="Glacier Blue" data-img="images/color-blue.png" aria-pressed="false" aria-label="Glacier Blue"></button>
-        <button class="swatch" type="button" style="--c:#3b3b3f" data-color="#3b3b3f" data-name="Graphite" data-img="images/color-graphite.png" aria-pressed="false" aria-label="Graphite"></button>
-        <button class="swatch" type="button" style="--c:#d8d8d6" data-color="#b9b9b7" data-name="Silver" data-img="images/color-silver.png" aria-pressed="false" aria-label="Silver"></button>
+        <button class="swatch" type="button" style="--c:#6b1f2a" data-color="#6b1f2a" data-name="Deep Cherry" data-filter="none" aria-pressed="true" aria-label="Deep Cherry"></button>
+        <button class="swatch" type="button" style="--c:#9fb7cf" data-color="#7f97ae" data-name="Glacier Blue" data-filter="hue-rotate(195deg) saturate(.45) brightness(1.3)" aria-pressed="false" aria-label="Glacier Blue"></button>
+        <button class="swatch" type="button" style="--c:#3b3b3f" data-color="#3b3b3f" data-name="Graphite" data-filter="grayscale(1) brightness(.7) contrast(1.15)" aria-pressed="false" aria-label="Graphite"></button>
+        <button class="swatch" type="button" style="--c:#d8d8d6" data-color="#b9b9b7" data-name="Silver" data-filter="grayscale(1) brightness(1.5) contrast(.9)" aria-pressed="false" aria-label="Silver"></button>
       </div>
       <p class="color-name" id="color-name" aria-live="polite">Deep Cherry</p>
     </div>
@@ -420,7 +430,38 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
   </div>
 </footer>
 
+<script src="js/scroll-sequence.js"></script>
 <script>
+  // Hero: copy lifts away and the phones rise to fill the stage, then the caption lands
+  (() => {
+    const seq = document.getElementById('hero');
+    const copy = document.getElementById('hero-copy');
+    const caption = document.getElementById('hero-caption');
+    const canvas = seq.querySelector('canvas');
+    const clamp = (v) => Math.min(1, Math.max(0, v));
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+    const RATIO = 1080 / 1200;                      // frame height / width
+    const apply = (p) => {
+      // Start: phones scaled to fit under the headline. End: full size, centred in the stage.
+      const cw = canvas.clientWidth || 1, ch = canvas.clientHeight || 1;
+      const imgH = Math.min(ch, cw * RATIO);
+      const top = copy.offsetTop + copy.offsetHeight + 16;
+      const s0 = Math.max(0.42, Math.min(1, (ch - top) / imgH));
+      const ty0 = top - (ch / 2 - (s0 * imgH) / 2);
+      const e = ease(clamp(p / 0.22));
+      canvas.style.transform = `translateY(${ty0 * (1 - e)}px) scale(${s0 + (1 - s0) * e})`;
+      copy.style.opacity = 1 - e;
+      copy.style.transform = `translateY(${-40 * e}px)`;
+      copy.style.visibility = e > 0.98 ? 'hidden' : 'visible';
+      caption.style.opacity = reduced ? 1 : clamp((p - 0.62) / 0.12);
+    };
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let last = 0;
+    seq.addEventListener('seq:progress', (ev) => apply(last = ev.detail.progress));
+    addEventListener('resize', () => apply(last));
+    apply(0);
+  })();
+
   // Aperture demo
   const aperture = document.getElementById('aperture');
   document.querySelectorAll('.fstop').forEach(btn => {
@@ -430,8 +471,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
     });
   });
 
-  // Color picker: swaps the render and tints the fallback mock
-  const colorShot = document.getElementById('color-shot');
+  // Color picker: recolours the render
   const colorImg = document.getElementById('color-img');
   const colorName = document.getElementById('color-name');
   document.querySelectorAll('.swatch').forEach(sw => {
@@ -439,9 +479,8 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
       document.querySelectorAll('.swatch').forEach(s => s.setAttribute('aria-pressed', s === sw));
       document.documentElement.style.setProperty('--phone-color', sw.dataset.color);
       colorName.textContent = sw.dataset.name;
-      colorShot.classList.remove('empty');
       colorImg.alt = 'iPhone 18 Pro Max in ' + sw.dataset.name;
-      colorImg.src = sw.dataset.img;
+      colorImg.style.filter = sw.dataset.filter;
     });
   });
 
