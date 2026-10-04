@@ -2,7 +2,7 @@
 
 Which installed design skill to pull in, when, and for what. All paths are under the skills folder (`.claude/skills/` in a project, `~/.claude/skills/` for a personal install).
 
-**These skills are optional.** Check whether each exists before using it (`ls <skills-dir>`). If one is missing, use the fallback in this file or proceed from the example alone; never block on a missing skill. The scripts and references inside `reference-to-ui` work on their own.
+**These skills are optional.** Check whether each exists before using it (`ls <skills-dir>`, or the list of available skills). Skills installed from a claude.ai account load under their internal `name`, not their repo folder name: `taste-skill` is `design-taste-frontend`, `soft-skill` is `high-end-visual-design`, `minimalist-skill` is `minimalist-ui`, `brutalist-skill` is `industrial-brutalist-ui`, `gpt-tasteskill` is `gpt-taste`. Look for either name. If one is missing, use the fallback in this file or proceed from the example alone; never block on a missing skill. The scripts and references inside `reference-to-ui` work on their own.
 
 **Precedence, always:** the user's words > the example (reference) > the project's existing design system > anything a skill below suggests. A skill fills gaps the example leaves open; it never overrides what the example shows. If a skill's rule contradicts the example (e.g. it bans a pattern the example uses), the example wins and you say so in one line.
 
@@ -49,15 +49,28 @@ These carry strong opinions. Use one only when the example clearly belongs to it
 
 | Skill | Use when the example is… | Take | Ignore when an example exists |
 |---|---|---|---|
-| `soft-skill` | premium agency, soft shadows, refined cards | spacing, shadow and card craft | its fixed font/section prescriptions |
-| `minimalist-skill` | warm monochrome, editorial, flat | type contrast, restraint | its palette if the example differs |
-| `brutalist-skill` | Swiss grid, terminal, raw | grid rigour, type scale contrast | degradation effects the example lacks |
-| `taste-skill` | any landing/portfolio | its anti-slop pre-flight check | its own direction-picking |
-| `gpt-tasteskill` | GSAP-heavy, scroll-driven sites | GSAP technique (pinning, scrubbing, stacking) | random layout picks, mandatory AIDA/bento, "static is forbidden" |
+| `soft-skill` / `high-end-visual-design` | premium agency, soft shadows, refined cards | spacing, shadow and card craft | its fixed font/section prescriptions |
+| `minimalist-skill` / `minimalist-ui` | warm monochrome, editorial, flat | type contrast, restraint | its palette if the example differs |
+| `brutalist-skill` / `industrial-brutalist-ui` | Swiss grid, terminal, raw | grid rigour, type scale contrast | degradation effects the example lacks |
+| `taste-skill` / `design-taste-frontend` | any landing/portfolio | its anti-slop pre-flight check | its own direction-picking |
+| `gpt-tasteskill` / `gpt-taste` | GSAP-heavy, scroll-driven sites | GSAP technique (pinning, scrubbing, stacking) | random layout picks, mandatory AIDA/bento, "static is forbidden" |
 | `stitch-skill` | user wants a DESIGN.md for Google Stitch | DESIGN.md format | n/a |
 | `redesign-skill` | restyling an existing site | its audit of generic patterns | n/a |
 | `ui-styling` | stack is React + Tailwind/shadcn | component implementation | default shadcn look if the example differs |
 | `design-system` | user wants tokens/components formalised | three-layer token structure | n/a |
+
+## Review and polish: `impeccable`
+
+A design-director skill with sub-commands. It agrees with this skill's precedence ("the brief wins"), so use it as the critic, not the art director:
+
+| Use | Command | Notes |
+|---|---|---|
+| Step 4 quality pass on the finished build | `impeccable audit` (a11y, performance, responsive) and `impeccable critique` (UX heuristics) | Fix what applies; list what you skip and why |
+| Final pass before handing over | `impeccable polish` | Keep the example's identity; polish is refinement, not redesign |
+| No example and the user wants options | `impeccable shape` | Its plan then becomes the reference; skip it when an example exists |
+| Tone a build up or down | `impeccable bolder` / `quieter` | Only within what the example shows |
+
+Skip its `new-work` direction-setting and its PRODUCT.md / DESIGN.md teach pass when an example exists; the example already sets the direction.
 
 ## Motion
 
@@ -78,4 +91,5 @@ These carry strong opinions. Use one only when the example clearly belongs to it
 ## Always on
 
 - `output-skill`: write complete files, no placeholders or truncation.
+- `brag`: after shipping, turns the finished site into a short launch video when the user wants to share it.
 - `playwright-cli`: interactive browser work if you need to click through a reference site (menus, hover states) before capturing it.

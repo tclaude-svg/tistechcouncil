@@ -1,6 +1,6 @@
 ---
 name: reference-to-ui
-description: Build, rebuild or restyle any UI (website, landing page, app screen, component, scroll/GSAP motion site) from real examples, pulling in every installed design skill (ui-ux-pro-max, GSAP patterns, awesome-design-md, awesome-claude-design, Refero styles, design-motion-principles, taste/soft/minimalist/brutalist, ui-styling) so it never looks AI-generated. Use whenever the user asks to build or redesign a UI, says "make it similar to this", "copy this UI", "make it look like this", "screenshot to code", "use this as an example", "animations like this", "it looks AI generated", or shares a screenshot, URL, screen recording or video of a design. The example always leads; the other skills fill gaps. Makes cinematic scroll sites: writes Google Flow prompts (free images, Veo video) and ChatGPT/Nano Banana prompts, turns stills into 3D camera journeys with depth maps, with shader scenes as backup. Proves the result with bundled capture, compare, record and slop-check scripts.
+description: Build, rebuild or restyle any UI (website, landing page, app screen, component, scroll/GSAP motion site) from real examples, pulling in every installed design skill (ui-ux-pro-max, GSAP patterns, awesome-design-md, awesome-claude-design, Refero styles, design-motion-principles, taste/soft/minimalist/brutalist, impeccable, ui-styling) so it never looks AI-generated. Use whenever the user asks to build or redesign a UI, says "make it similar to this", "copy this UI", "make it look like this", "screenshot to code", "use this as an example", "animations like this", "it looks AI generated", or shares a screenshot, URL, screen recording or video of a design. The example always leads; the other skills fill gaps. Makes cinematic scroll sites: writes Google Flow prompts (free images, Veo video) and ChatGPT/Nano Banana prompts, turns stills into 3D camera journeys with depth maps, with shader scenes as backup. Proves the result with bundled capture, compare, record and slop-check scripts.
 ---
 
 # reference-to-ui
@@ -106,7 +106,7 @@ Serve locally (dev server, or `npx http-server`). Then:
 2. **Motion match** (if the example moves): `record.mjs --scroll` (or play), then `video-ref.sh` on the recording. Compare its `sheet.png` with the example's: same order of events, similar timing, same easing feel.
 3. Look at the images. List the three biggest differences: layout and proportions first, then type, then colour, then motion timing, then details. Fix, rerun, repeat.
 4. `slop-check.mjs`: fix every HIGH. `--allow` only what the example itself has, and tell the user.
-5. **UX pass:** 3 to 5 `ui-ux-pro-max --domain ux` queries for what you built; fix what applies. For motion-heavy pages, `design-motion-principles` Audit mode.
+5. **UX pass:** 3 to 5 `ui-ux-pro-max --domain ux` queries for what you built, plus `impeccable audit` and `critique` if installed; fix what applies. For motion-heavy pages, `design-motion-principles` Audit mode.
 6. **Interaction pass:** click every control in a real browser (Playwright): menus, forms, carousels, modals, toggles. Zero console errors.
 
 Stop when:
