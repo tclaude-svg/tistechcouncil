@@ -4,7 +4,7 @@ Ranked. Use the first one available.
 
 1. **What the user gave.** Screenshot, URL, video, Figma export, a Refero style link, a DESIGN.md. This always wins.
 2. **The project's own assets.** Logo, colours, photos, real copy. Always collected, even with an external example.
-3. **A brand system in this repo.** `awesome-design-md/design-md/<brand>/` (74 brands), `awesome-claude-design/design-md/<family>/` (by aesthetic family, plus remixes).
+3. **A brand system in this repo.** `awesome-design-md/design-md/<brand>/` (74 brands), `awesome-claude-design/design-md/<name>/` (68 designs, pick by feel from its `CATALOG.md`).
 4. **A gallery, then the real site.** Browse a gallery to pick real sites, then capture the real site itself with `scripts/capture.mjs` (or video-record it). Never treat a gallery thumbnail as the spec when the live site is reachable.
 
 ## Refero (refero.design, styles.refero.design)
