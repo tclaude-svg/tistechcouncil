@@ -1,6 +1,6 @@
 ---
 name: reference-to-ui
-description: Build, rebuild or restyle any UI (website, landing page, app screen, component, scroll/GSAP motion site) from real examples, pulling in every installed design skill (ui-ux-pro-max, GSAP patterns, awesome-design-md, awesome-claude-design, Refero styles, design-motion-principles, taste/soft/minimalist/brutalist, impeccable, ui-styling) so it never looks AI-generated. Use whenever the user asks to build or redesign a UI, says "make it similar to this", "copy this UI", "make it look like this", "screenshot to code", "use this as an example", "animations like this", "it looks AI generated", or shares a screenshot, URL, screen recording or video of a design. The example always leads; the other skills fill gaps. Makes cinematic scroll sites: writes Google Flow prompts (free images, Veo video) and ChatGPT/Nano Banana prompts, turns stills into 3D camera journeys with depth maps, with shader scenes as backup. Proves the result with bundled capture, compare, record and slop-check scripts.
+description: Build, rebuild or restyle any UI (website, landing page, app screen, component, scroll/GSAP motion site) from real examples, pulling in every installed design skill (ui-ux-pro-max, GSAP patterns, awesome-design-md, Refero styles, design-motion-principles, taste/soft/minimalist/brutalist, impeccable, ui-styling) so it never looks AI-generated. Use whenever the user asks to build or redesign a UI, says "make it similar to this", "copy this UI", "make it look like this", "screenshot to code", "use this as an example", "animations like this", "it looks AI generated", or shares a screenshot, URL, screen recording or video of a design. The example always leads; the other skills fill gaps. Makes cinematic scroll sites: writes Google Flow prompts (free images, Veo video) and ChatGPT/Nano Banana prompts, turns stills into 3D camera journeys with depth maps, with shader scenes as backup. Proves the result with bundled capture, compare, record and slop-check scripts.
 ---
 
 # reference-to-ui
@@ -53,7 +53,7 @@ Use the first that applies (details in `references/sources.md`):
 1. **Screenshot/image:** read it at full size. Measure from pixels: content width, gutters, section heights, type sizes against known elements.
 2. **URL:** `capture.mjs`. Use measured values; never estimate what was measured. Click through menus or hover states with `playwright-cli` if the example's interactions matter.
 3. **Video** (`.mov`, `.mp4`, screen recording, reel): `video-ref.sh`, then read `sheet.png`, the key frames and `motion.txt`. Write down what moves, in what order, how far, for how long, with what easing. Note whether motion is footage (a video playing or scrubbing), UI animation, or both. Footage is not code: it needs real visuals. Ask for the user's own footage or photos first; if they have none, follow `references/google-flow.md` if they use Google Flow (free images, or Veo video for real motion), otherwise `references/cinematic.md` (AI stills from ChatGPT or Nano Banana brought to life in code, shader scenes as backup).
-4. **Brand name** ("like Stripe"): `awesome-design-md/design-md/<brand>/`, or the same path under `awesome-claude-design/`. **A feel** ("editorial", "dark cinematic", "terminal"): search `awesome-claude-design/CATALOG.md` and open the matching `awesome-claude-design/design-md/<name>/DESIGN.md`.
+4. **Brand name** ("like Stripe"): `awesome-design-md/design-md/<brand>/`. **A feel** ("editorial", "dark cinematic", "terminal"): search `awesome-design-md/CATALOG.md` and open the matching `awesome-design-md/design-md/<name>/DESIGN.md`.
 5. **Refero:** use the style DESIGN.md or original site URL the user gives, or the Refero MCP if connected. **Never crawl Refero**; its robots.txt blocks AI agents.
 6. **Nothing:** ask for 1 to 3 examples and offer 2 or 3 named options from the brand libraries. Do not invent a look.
 
@@ -72,7 +72,7 @@ Check which design skills are installed (the available-skills list, or `ls <skil
 | Role | Skill | Runs in |
 |---|---|---|
 | Design intelligence | `ui-ux-pro-max`: `--design-system` for tokens and gaps, `--domain` queries for fonts, UX and GSAP | Step 2 and Step 4 (always) |
-| Look and brand systems | `awesome-claude-design` / `awesome-design-md`: the closest DESIGN.md to the example, for components and states the example does not show | Step 1 (no example or a named brand or feel), Step 2 (gaps) |
+| Look and brand systems | `awesome-design-md`: the closest DESIGN.md to the example, for components and states the example does not show | Step 1 (no example or a named brand or feel), Step 2 (gaps) |
 | Craft rules | `taste-skill` / `design-taste-frontend` pre-flight check on every landing page or portfolio, plus the one style skill (soft, minimalist, brutalist, gpt-taste) that matches the example, if any | Step 2 and Step 3 |
 | Stack | `ui-styling` for React + Tailwind/shadcn | Step 3 |
 | Motion | `references/gsap.md`, `design-motion-principles` | Step 3 and Step 4 |

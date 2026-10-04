@@ -37,8 +37,8 @@ Do not use `--design-system` output to replace the example's own palette, type o
 | Screenshot / image | Read it at full size and measure from pixels (see SKILL.md step 1) |
 | Website URL | `scripts/capture.mjs` (measured tokens) |
 | Video (screen recording, reel, `.mov`, `.mp4`) | `scripts/video-ref.sh` (contact sheet, key frames, motion timeline), then `references/gsap.md` |
-| Brand name ("like Stripe", "Apple-style") | `awesome-design-md/design-md/<brand>/DESIGN.md`, or the same path under `awesome-claude-design/` (68 of the same brands) |
-| A feel ("editorial", "dark cinematic", "terminal", "warm", "playful gradients") | Search `awesome-claude-design/CATALOG.md` (68 designs, each with a one-line feel), then `awesome-claude-design/design-md/<name>/DESIGN.md` |
+| Brand name ("like Stripe", "Apple-style") | `awesome-design-md/design-md/<brand>/DESIGN.md` |
+| A feel ("editorial", "dark cinematic", "terminal", "warm", "playful gradients") | Search `awesome-design-md/CATALOG.md` (68 designs, each with a one-line feel), then `awesome-design-md/design-md/<name>/DESIGN.md` |
 | Two brands to blend | Both DESIGN.md files: structure, spacing and type from one, colour and accent from the other, merged tokens written down before building |
 | A Refero style link or DESIGN.md export | Read what the user pasted (see `references/sources.md` for Refero rules) |
 | Nothing | Ask for examples; offer options (see `references/sources.md`) |

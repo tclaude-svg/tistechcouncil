@@ -34,7 +34,7 @@ bash ~/.claude/skills/reference-to-ui/scripts/doctor.sh --install  # install wha
 ## Works better with (optional)
 
 If these skills are also installed, reference-to-ui uses them; if not, it works on its own:
-`ui-ux-pro-max`, `awesome-design-md`, `awesome-claude-design`, `design-motion-principles`, `taste-skill`, `soft-skill`, `minimalist-skill`, `brutalist-skill`, `gpt-tasteskill`, `ui-styling`, `playwright-cli`.
+`ui-ux-pro-max`, `awesome-design-md`, `design-motion-principles`, `taste-skill`, `soft-skill`, `minimalist-skill`, `brutalist-skill`, `gpt-tasteskill`, `ui-styling`, `playwright-cli`.
 
 ## What is inside
 
